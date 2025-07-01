@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko-kr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./section03/day6.js"></script>
+    <style>
+      .part1-select {
+        margin-bottom: 20px;
+      }
+      label,
+      input,
+      select {
+        padding: 5px;
+        margin: 5px;
+      }
+    </style>
+    <!-- <script src="./section04/sec04-2.js"></script> -->
   </head>
-  <body></body>
+  <body>
+    <!-- sec04-3.js와 함께 사용한 DOM 요소들 -->
+    <!-- <div id="test"></div>
+    <div class="animal-info">
+      <div id="name" class="info">강아지</div>
+      <div id="color" class="info">갈색</div>
+      <div id="age" class="info">2살</div>
+    </div> -->
+
+    <!-- sec04-4.js와 함께 사용한 DOM 요소들 -->
+    <div class="part1-select">
+      <label for="selFruit">Choose Fruits : </label>
+      <select name="" id="selFruit">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cherry">Cherry</option>
+        <option value="grape">Grape</option>
+      </select>
+    </div>
+
+    <div class="part2-input">
+      <label for="userName">ID</label>
+      <input type="text" id="userName" placeholder="아이디를 입력 해 주세요" />
+      <label for="userPW">PassWord</label>
+      <input type="password" id="userPW" placeholder="영문 + 숫자 8~16글자" />
+      <label for="userNum">phone</label>
+      <input
+        type="number"
+        id="userNum"
+        placeholder="(선택) 전화번호"
+        value="01012341234"
+      />
+      <button>Login</button>
+    </div>
+  </body>
+  <script src="./section04/sec04-4.js"></script>
+  <!-- DOM 사용 시 스크립트가 나중에 나와야 함 -->
 </html>
