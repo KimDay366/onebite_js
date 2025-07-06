@@ -1,4 +1,4 @@
-export default function CityDetail() {
+export default function CityDetail({}) {
   this.$target = document.createElement("div");
   this.$target.className = "city-detail";
 
