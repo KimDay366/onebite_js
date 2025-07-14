@@ -15,9 +15,9 @@ export const pokemonApi = async ({ type, searchWord }) => {
     }
 
     let res = await fetch(url);
-    let poketmons = await res.json();
+    let pokemonList = await res.json();
 
-    return poketmons.data;
+    return pokemonList.data;
   } catch (err) {
     console.log(err);
   }
