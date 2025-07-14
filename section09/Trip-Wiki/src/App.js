@@ -81,7 +81,7 @@ export default function App($app) {
     },
   });
 
-  const regionList = new RegionList();
+  const regionList = new RegionList({ $app });
 
   const cityList = new CityList({
     $app,
@@ -107,7 +107,7 @@ export default function App($app) {
     },
   });
 
-  const cityDetial = new CityDetail();
+  const cityDetial = new CityDetail({ $app });
 
   // 변경되는 상태값 표기
   this.setState = (newState) => {
