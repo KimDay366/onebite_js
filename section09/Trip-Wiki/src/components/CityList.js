@@ -7,7 +7,7 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
   $app.appendChild(this.$target);
 
   this.handleLoadMore = handleLoadMore;
-
+  
   this.template = () => {
     let temp = `<div class="city-items-container">`; // citi list를 담을 그릇 만듬
     if (this.state) {
@@ -23,12 +23,17 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
 
       temp += `</div>`;
     }
+
     return temp;
   };
+
   this.render = () => {
     this.$target.innerHTML = this.template();
+        console.log(`city : ${this.state.sortBy}`);
 
     if (!this.state.isEnd) {
+      // isEnd가 false인 경우 = 데이터가 남았음 = 더보기 버튼이 필요함
+      // 더보기 버튼 렌더링
       const $loadMoreBtn = document.createElement("button");
       $loadMoreBtn.className = "add-items-btn";
       $loadMoreBtn.textContent = "+ 더보기";
@@ -39,13 +44,15 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
       // 생성된 버튼을 누를 경우, 추가 cities가 나오도록 함수 설정
       $loadMoreBtn.addEventListener("click", () => {
         this.handleLoadMore();
-      });
+      }); // => 이 부분이 실제 이벤트가 일어나는 장소, 그 전까지는 이벤트가 일어나도록 셋팅!
     }
   };
+
   this.setState = (newState) => {
     this.state = newState;
     this.render();
   };
+
   this.render();
 }
 
