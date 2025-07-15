@@ -11,8 +11,8 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
   this.template = () => {
     let temp = `<div class="city-items-container">`; // citi list를 담을 그릇 만듬
     if (this.state) {
-      console.log(this.state.cities);
       this.state.cities.forEach((ele) => {
+        console.log(this.state.cities);
         // 시티의 숫자만큼 타일 만들기
         temp += `<div class="city-item" id=${ele.id}>
             <img src =${ele.image} />
