@@ -12,7 +12,6 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
     let temp = `<div class="city-items-container">`; // citi list를 담을 그릇 만듬
     if (this.state) {
       this.state.cities.forEach((ele) => {
-        console.log(this.state.cities);
         // 시티의 숫자만큼 타일 만들기
         temp += `<div class="city-item" id=${ele.id}>
             <img src =${ele.image} />
@@ -29,7 +28,6 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
 
   this.render = () => {
     this.$target.innerHTML = this.template();
-        console.log(`city : ${this.state.sortBy}`);
 
     if (!this.state.isEnd) {
       // isEnd가 false인 경우 = 데이터가 남았음 = 더보기 버튼이 필요함
