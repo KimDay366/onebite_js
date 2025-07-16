@@ -1,12 +1,14 @@
-export default function CityList({ $app, initialState, handleLoadMore }) {
+export default function CityList({ $app, initialState, handleLoadMore, handleItemClick }) {
+  
   this.state = initialState; // initialState 키 추가
+  this.handleLoadMore = handleLoadMore;
+  this.handleItemClick = handleItemClick;
 
   this.$target = document.createElement("div");
   this.$target.className = "city-list";
 
   $app.appendChild(this.$target);
 
-  this.handleLoadMore = handleLoadMore;
   
   this.template = () => {
     let temp = `<div class="city-items-container">`; // citi list를 담을 그릇 만듬
@@ -28,6 +30,12 @@ export default function CityList({ $app, initialState, handleLoadMore }) {
 
   this.render = () => {
     this.$target.innerHTML = this.template();
+
+    this.$target.querySelectorAll('div.city-item').forEach((ele)=>{
+      ele.addEventListener('click', ()=>{
+        this.handleItemClick(ele.id);
+      });
+    });
 
     if (!this.state.isEnd) {
       // isEnd가 false인 경우 = 데이터가 남았음 = 더보기 버튼이 필요함
