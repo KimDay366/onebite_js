@@ -18,7 +18,7 @@ export default function App($app) {
       return sortText;
     };
 
-    return 'total';
+    return '';
   };
 
   const getSearchWord = () => {
@@ -62,26 +62,17 @@ export default function App($app) {
       sortBy: this.state.sortBy,
       searchWord: this.state.searchWord,
     },
+
     handleSortChange: async (sortBy) => {
 
-      console.log(sortBy);
       // 정렬 기준에 따라 변경
       const pageUrl = `/${this.state.region}?sort=${sortBy}`; // URL 변겅
-      history.pushState(
-        null,
-        null,
-        this.state.searchWord
-          ? pageUrl + `&search=${this.state.searchWord}`
-          : pageUrl
-      ); // 검색어가 있는 경우, 해당 내용까지 함께 적용하여 사용
+
+      history.pushState( null, null, this.state.searchWord ? pageUrl + `&search=${this.state.searchWord}` : pageUrl ); 
+      // 검색어가 있는 경우, 해당 내용까지 함께 적용하여 사용
 
       // 정렬기준이 변경됨에 따라, 출력되는 cities도 변경 되어야 함
-      const sortCities = await request(
-        0,
-        this.state.region,
-        sortBy,
-        this.state.searchWord
-      );
+      const sortCities = await request( 0, this.state.region, sortBy, this.state.searchWord);
 
       // 정렬 기준이 변하면서 출력값도 변하기 때문에 상태값 업데이트
       this.setState({
@@ -91,11 +82,10 @@ export default function App($app) {
         cities: sortCities,
       });
     },
+
     handleSearch: async (searchWord) => {
-      history.pushState(
-        null,
-        null,
-        `/${this.state.region}?sort=${this.state.sortBy}&search=${this.state.searchWord}`
+
+      history.pushState( null, null, `/${this.state.region}?sort=${this.state.sortBy}&search=${searchWord}`
       ); // 검색어가 있는 경우 사용할 URL 할당
 
       // 검색 필터가 설정됨에 따라, 출력되는 cities도 변경 되어야 함
