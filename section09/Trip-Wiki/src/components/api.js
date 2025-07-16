@@ -4,6 +4,9 @@ export const request = async (startIdx, region, sortBy, searchWord) => {
   try {
     // 1) URL 설정
     let url = `${API_URL}`;
+
+    console.log(`API url : ${url}`);
+
     
     console.log(`API : ${sortBy}`);
 
