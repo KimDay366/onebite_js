@@ -3,16 +3,16 @@ import { setPokemonType } from "../modules/typeTag.js";
 export default function PokemonList({
   $app,
   initialState,
-  handleItemClick,
-  handleTypeClick,
+  handleItem,
+  handleType,
 }) {
   this.state = initialState;
   this.$target = document.createElement("div");
   this.$target.className = "pokemon-list";
 
   $app.appendChild(this.$target);
-  this.handleItemClick = handleItemClick;
-  this.handleTypeClick = handleTypeClick;
+  this.handleItem = handleItem;
+  this.handleType = handleType;
 
   this.template = () => {
     //   // html 코드는 아래와 같이 제공드립니다.
@@ -22,6 +22,7 @@ export default function PokemonList({
 
     if (this.state) {
       this.state.forEach((ele) => {
+        // console.log(this.state); 배열안에 객체가 담긴 형태가 출력되어야 함
         temp += `<div class="pokemon-wrapper">
                   <div class="img-wrapper" id="img${ele.id}">
                       <img src="${ele.img}" alt="${ele.name}"></img>
@@ -40,6 +41,23 @@ export default function PokemonList({
 
   this.render = () => {
     this.$target.innerHTML = this.template();
+
+    // document.getElementsByClassName('type').addEventListner('click',()=>{
+    //   console.log(event.target.text);
+    // });
+
+    this.$target.querySelectorAll('div.img-wrapper').forEach((ele)=>{
+      ele.addEventListener('click', ()=>{
+        this.handleItem(ele.id);
+      })
+    });
+
+    this.$target.querySelectorAll('div.type-tag').forEach((ele)=>{
+      ele.addEventListener('click', ()=>{
+        this.handleType(ele.id);
+        // console.log(ele.id);
+      });
+    });
   };
 
   this.setState = (newState) => {
