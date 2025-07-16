@@ -1,9 +1,10 @@
 let API_URL = "https://pokemon-api-ecru-eta.vercel.app/";
 
-export const pokemonApi = async ({ type, searchWord }) => {
+export const pokemonApi = async ( type, searchWord ) => {
   try {
     // 1) 기본 URL 설정
     let url = API_URL;
+
 
     // 타입을 선택 한 경우, 타입 붙임
     if (type) {
