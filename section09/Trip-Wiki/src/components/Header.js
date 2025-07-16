@@ -1,9 +1,4 @@
-export default function Header({
-  $app,
-  initialState,
-  handleSortChange,
-  handleSearch,
-}) {
+export default function Header({ $app, initialState, handleSortChange, handleSearch,}) {
   // 초기값 바인딩
   this.state = initialState;
   this.handleSortChange = handleSortChange;
@@ -20,7 +15,7 @@ export default function Header({
 
     // header 요소 만들기 : 좌측 로고 & 홈페이지 이동 , 우측 정렬 & 검색 입력
     let temp = `<h1 class="title">
-                  <a href = "/">✈️ Trip Wiki</a>
+                  <a id="logo" href = "/">✈️ Trip Wiki</a>
                 </h1>
                 <div class="filter-search-container">
                   <div class="filter">
@@ -44,8 +39,6 @@ export default function Header({
 
   this.render = () => {
     this.$target.innerHTML = this.template();
-
-    console.log(`header render : ${this.state.sortBy}`);
 
     // 정렬이 변경 될 경우, 해당 값을 App.js에 만든 handleSortChange()에 전달하여 실행
     document.getElementById('sortList').addEventListener('change',(event)=>{
