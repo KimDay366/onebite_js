@@ -75,6 +75,13 @@ body {
   background-color: #da343c;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
+}
+
+.header button.resetBtn{
+  background-color:#999999;
+  color : white;
+  font-size: 30px;
 }
 
 /* POKEMON LIST */
