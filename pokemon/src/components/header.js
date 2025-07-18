@@ -5,6 +5,7 @@ export default function Header({$app, initialState,handleClick, handleSearch}){
     this.state = initialState;
     this.handleClick = handleClick;
     this.handleSearch = handleSearch;
+    // this.handleReset = handleReset;
 
     // header outBox 만들기
     this.$target = document.createElement('header');
@@ -19,9 +20,10 @@ export default function Header({$app, initialState,handleClick, handleSearch}){
         포켓몬 도감</div>`;
 
         const searchTag = `<div class="search">
+            <div id="typeSet" class="type-setting"></div>
             <input type="text" placeholder="포켓몬을 검색하세요!" id="search" autocomplete="off" value=${decodeURIComponent(this.state.searchWord)}></input>
             <button id="search-button"><img src="src/img/search.png"></img></button>
-            <button id="reset-button" class="resetBtn">X</button>
+            <button id="reset-button" class="resetBtn"> 검색 초기화 </button>
         </div>`;
 
 
@@ -32,32 +34,49 @@ export default function Header({$app, initialState,handleClick, handleSearch}){
         return logoTag;
     }
 
+    const setPokeType = () =>{
+
+        const urlType = window.location.pathname.replace("/",'');
+        const resetType = urlType !== "" ? urlType.toUpperCase() : 'ALL';
+        
+        document.getElementById('typeSet').innerText = `Select Type : ${resetType}`;
+    }
+
     this.render = ()=>{
+
         this.$target.innerHTML = this.template();
 
-        const searchT = document.getElementById('search');
+        if (!this.state.currentPage.includes('detail/')){
+            setPokeType();
 
-        document.getElementById('title').addEventListener('click',()=>{
-            this.handleClick();
-            searchT.value = '';
-        });
+            const searchT = document.getElementById('search');
 
-        document.getElementById('search-button').addEventListener('click',()=>{
-            this.handleSearch(searchT.value);
-        });
+            document.getElementById('title').addEventListener('click',()=>{
+                this.handleClick();
+                searchT.value = '';
+                document.getElementById('typeSet').innerText = 'Select Type : ALL';
+            });
 
-        document.getElementById('reset-button').addEventListener('click',()=>{
-            searchT.value = '';
-            this.handleSearch(searchT.value);
-        });
+            document.getElementById('search-button').addEventListener('click',()=>{
+                this.handleSearch(searchT.value);
+                setPokeType();
+            });
+
+            document.getElementById('reset-button').addEventListener('click',()=>{
+                searchT.value = '';
+                this.handleSearch(searchT.value);
+                setPokeType();
+            });
+
+        }
+        
     }
 
     this.setState = (newState)=>{
         this.state = newState;
         this.render();
     }
+
     this.render();
-
-
 
 }
