@@ -1,8 +1,11 @@
+// component
 import Header from "./components/Header.js";
 import RegionList from "./components/RegionList.js";
 import CityList from "./components/CityList.js";
 import CityDetail from "./components/CityDetail.js";
-import { request } from "./components/api.js";
+
+// Module
+import { request, requDetail } from "./components/api.js";
 
 // 현재 상태 표기 + 변경값 확인, 각각의 컴포넌트 불러오기, 초기값(init) 셋팅 진행
 export default function App($app) {
@@ -116,6 +119,7 @@ export default function App($app) {
       initialState: {
         sortBy: this.state.sortBy,
         searchWord: this.state.searchWord,
+        currentPage : this.state.currentPage,
       },
 
       handleSortChange: async (sortBy) => {
@@ -216,8 +220,18 @@ export default function App($app) {
     });
   }; // renderCityList();
 
-  const cityDetial = ()=>{
-    new CityDetail({ $app });
+  const cityDetial = async (cityId)=>{
+
+    // api.js에서 detail 페이지에 사용 할 데이터를 가져옴
+    try{
+
+      const detailCity = await requDetail(cityId);
+      new CityDetail({ $app , initialState: detailCity });
+
+    }catch(err){
+      console.log(err);
+    }
+
   }; // cityDetial();
 
   // 변경되는 상태값 표기
@@ -245,20 +259,20 @@ export default function App($app) {
     $app.innerHTML = '';
 
     if(path.startsWith('/city')){
-      console.log('detail page');
+
+      const urlId = path.split('/city/')[1];
 
       renderHeader();
-      cityDetial();
+      cityDetial(urlId);
 
     }else {
-      console.log('main page');
 
       renderHeader();
       renderRegion();
       renderCityList();
 
-    }
-  }
+    };
+  };
 
   // 앞으로 가기, 뒤로 가기 버튼 사용
   window.addEventListener('popstate', async ()=>{
