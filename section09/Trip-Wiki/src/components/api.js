@@ -38,3 +38,19 @@ export const request = async (startIdx, region, sortBy, searchWord) => {
     console.log(err);
   }
 };
+
+export const requDetail = async (cityId) =>{
+  try{
+
+    const respon = await fetch(`${API_URL}city/${cityId}`);
+
+    if(respon){
+
+      const data = respon.json();
+      return data;
+    }
+
+  }catch(err){
+    console.log(err);
+  }
+}
