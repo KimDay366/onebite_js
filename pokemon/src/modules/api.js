@@ -19,14 +19,26 @@ export const pokemonApi = async ( type, searchWord ) => {
     let pokemonList = await res.json();
 
     return pokemonList.data;
+
   } catch (err) {
     console.log(err);
   }
 };
 
 export const getPokemonDetail = async (id) => {
-  const url = API_URL + "detail/" + id;
-  const res = await fetch(url);
-  const pokemonDetails = await res.json();
-  return pokemonDetails.data;
+  
+  try{
+
+    const url = API_URL + "detail/" + id;
+
+    const res = await fetch(url);
+
+    const pokemonDetails = await res.json();
+
+    return pokemonDetails.data;
+
+  } catch(err) {
+    console.log(err);
+  }
+  
 };
