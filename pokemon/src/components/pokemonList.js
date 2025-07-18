@@ -24,7 +24,7 @@ export default function PokemonList({
       this.state.forEach((ele) => {
         // console.log(this.state); 배열안에 객체가 담긴 형태가 출력되어야 함
         temp += `<div class="pokemon-wrapper">
-                  <div class="img-wrapper" id="img${ele.id}">
+                  <div class="img-wrapper" id="${ele.id}">
                       <img src="${ele.img}" alt="${ele.name}"></img>
                   </div>
                   <div class="pokemon-info">
@@ -55,7 +55,9 @@ export default function PokemonList({
     this.$target.querySelectorAll('div.type-tag').forEach((ele)=>{
       ele.addEventListener('click', ()=>{
         this.handleType(ele.id);
-        // console.log(ele.id);
+
+        const urlType = window.location.pathname.replace('/','').toUpperCase()
+        document.getElementById('typeSet').innerText = `Select Type : ${urlType}`;
       });
     });
   };
